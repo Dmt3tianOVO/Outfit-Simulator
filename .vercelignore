@@ -51,5 +51,7 @@ fix_*.py
 verify_project.py
 create_dummy_model.py
 
-# 大文件（如果模型太大，考虑使用外部存储）
-# models/*.h5
+# 大文件（模型文件太大，Vercel 部署时会自动使用规则引擎）
+models/*.h5
+models/*.csv
+static/images/uploads/
