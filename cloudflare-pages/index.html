@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>穿搭分析系统 - Outfit Simulator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <h1>👔 穿搭分析系统</h1>
+            <p class="subtitle">AI 智能穿搭分析和推荐</p>
+        </header>
+
+        <!-- 主要内容 -->
+        <main class="main-content">
+            <!-- 上传区域 -->
+            <section class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📸</div>
+                    <p class="upload-text">点击或拖拽上传图片</p>
+                    <p class="upload-hint">支持 JPG、PNG 格式，最大 16MB</p>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+                
+                <!-- 图片预览 -->
+                <div class="image-preview" id="imagePreview" style="display: none;">
+                    <img id="previewImage" alt="预览">
+                </div>
+            </section>
+
+            <!-- 场景和款式选择 -->
+            <section class="controls-section">
+                <div class="control-group">
+                    <label>选择场景：</label>
+                    <div class="scene-buttons">
+                        <button class="scene-btn active" data-scene="休闲">🏃 休闲</button>
+                        <button class="scene-btn" data-scene="工作">💼 工作</button>
+                        <button class="scene-btn" data-scene="正式场合">🎩 正式场合</button>
+                        <button class="scene-btn" data-scene="运动">⚽ 运动</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>服装款式（可选）：</label>
+                    <div class="style-selectors">
+                        <select id="topStyle" class="style-select">
+                            <option value="">上衣款式</option>
+                            <option value="T恤">T恤</option>
+                            <option value="衬衫">衬衫</option>
+                            <option value="卫衣">卫衣</option>
+                            <option value="外套">外套</option>
+                        </select>
+                        <select id="bottomStyle" class="style-select">
+                            <option value="">下装款式</option>
+                            <option value="牛仔裤">牛仔裤</option>
+                            <option value="休闲裤">休闲裤</option>
+                            <option value="运动裤">运动裤</option>
+                        </select>
+                        <select id="shoesStyle" class="style-select">
+                            <option value="">鞋子款式</option>
+                            <option value="运动鞋">运动鞋</option>
+                            <option value="皮鞋">皮鞋</option>
+                            <option value="休闲鞋">休闲鞋</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="analyze-btn" id="analyzeBtn" disabled>
+                    <span class="btn-text">开始分析</span>
+                    <span class="btn-loading" style="display: none;">分析中...</span>
+                </button>
+            </section>
+
+            <!-- 分析结果 -->
+            <section class="result-section" id="resultSection" style="display: none;">
+                <h2>分析结果</h2>
+                
+                <!-- 评分 -->
+                <div class="score-card">
+                    <div class="score-value" id="scoreValue">0</div>
+                    <div class="score-label">综合评分</div>
+                </div>
+
+                <!-- 颜色分析 -->
+                <div class="result-card">
+                    <h3>🎨 颜色分析</h3>
+                    <div class="colors-grid" id="colorsGrid"></div>
+                </div>
+
+                <!-- 规则评估 -->
+                <div class="result-card">
+                    <h3>📏 规则评估</h3>
+                    <div class="rules-list" id="rulesList"></div>
+                </div>
+
+                <!-- 改进建议 -->
+                <div class="result-card">
+                    <h3>💡 改进建议</h3>
+                    <ul class="suggestions-list" id="suggestionsList"></ul>
+                </div>
+            </section>
+
+            <!-- API 配置 -->
+            <section class="config-section">
+                <details>
+                    <summary>⚙️ API 配置</summary>
+                    <div class="config-content">
+                        <label for="apiUrl">后端 API 地址：</label>
+                        <input type="text" id="apiUrl" class="api-input" 
+                               placeholder="https://your-api.vercel.app">
+                        <button class="save-btn" id="saveApiBtn">保存</button>
+                        <p class="config-hint">
+                            请先部署后端到 Vercel/Railway，然后在此输入 API 地址
+                        </p>
+                    </div>
+                </details>
+            </section>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>© 2024 穿搭分析系统 | Powered by AI</p>
+        </footer>
+    </div>
+
+    <!-- 消息提示 -->
+    <div class="message" id="message"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

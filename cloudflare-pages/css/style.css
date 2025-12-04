@@ -1,0 +1,560 @@
+/* ==================== 全局样式 ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-tertiary: #3a3a3a;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --accent: #4a9eff;
+    --accent-hover: #5ba8ff;
+    --success: #4caf50;
+    --warning: #ff9800;
+    --error: #f44336;
+    --border: #404040;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ==================== 头部 ==================== */
+.header {
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    color: var(--text-secondary);
+}
+
+/* ==================== 主内容 ==================== */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* ==================== 上传区域 ==================== */
+.upload-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.upload-area {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    background: var(--bg-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+}
+
+.upload-area:hover {
+    border-color: var(--accent);
+    background: var(--bg-tertiary);
+}
+
+.upload-area.dragover {
+    border-color: var(--accent);
+    background: var(--bg-tertiary);
+    transform: scale(1.02);
+}
+
+.upload-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+.upload-text {
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.upload-hint {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+.image-preview {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-secondary);
+}
+
+.image-preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ==================== 控制区域 ==================== */
+.controls-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.control-group label {
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.scene-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.scene-btn {
+    padding: 14px 12px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.scene-btn:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+}
+
+.scene-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+.style-selectors {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.style-select {
+    padding: 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.style-select:hover {
+    border-color: var(--accent);
+}
+
+.style-select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.1);
+}
+
+.analyze-btn {
+    width: 100%;
+    padding: 16px 24px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.analyze-btn:hover:not(:disabled) {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 158, 255, 0.3);
+}
+
+.analyze-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-loading {
+    display: inline-block;
+}
+
+/* ==================== 结果区域 ==================== */
+.result-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.result-section h2 {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.score-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    border: 1px solid var(--border);
+}
+
+.score-value {
+    font-size: 4em;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--success) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.score-label {
+    font-size: 1.1em;
+    color: var(--text-secondary);
+}
+
+.result-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid var(--border);
+}
+
+.result-card h3 {
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+}
+
+/* ==================== 颜色网格 ==================== */
+.colors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 16px;
+}
+
+.color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.color-swatch {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.color-info {
+    text-align: center;
+    width: 100%;
+}
+
+.color-name {
+    font-size: 0.9em;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.color-percent {
+    font-size: 0.85em;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.color-tone {
+    font-size: 0.75em;
+    color: var(--text-secondary);
+}
+
+/* ==================== 规则列表 ==================== */
+.rules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rule-item {
+    padding: 14px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    border-left: 4px solid var(--border);
+}
+
+.rule-item.passed {
+    border-left-color: var(--success);
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.rule-item.failed {
+    border-left-color: var(--error);
+    background: rgba(244, 67, 54, 0.1);
+}
+
+.rule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.rule-name {
+    font-weight: 600;
+}
+
+.rule-score {
+    font-size: 0.9em;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.rule-message {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+/* ==================== 建议列表 ==================== */
+.suggestions-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.suggestion-item {
+    padding: 12px 16px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent);
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+/* ==================== API 配置 ==================== */
+.config-section {
+    margin-top: 20px;
+}
+
+.config-section details {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid var(--border);
+}
+
+.config-section summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1em;
+    user-select: none;
+}
+
+.config-content {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.config-content label {
+    font-size: 0.95em;
+    color: var(--text-secondary);
+}
+
+.api-input {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 0.95em;
+}
+
+.api-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.save-btn {
+    padding: 10px 20px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.save-btn:hover {
+    background: var(--accent-hover);
+}
+
+.config-hint {
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* ==================== 页脚 ==================== */
+.footer {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 60px;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+/* ==================== 消息提示 ==================== */
+.message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 14px 24px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 2000;
+    opacity: 0;
+    transition: all 0.3s ease;
+    max-width: 90%;
+}
+
+.message.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.message.error {
+    border-left: 4px solid var(--error);
+}
+
+.message.success {
+    border-left: 4px solid var(--success);
+}
+
+/* ==================== 加载状态 ==================== */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading p {
+    color: var(--text-secondary);
+    font-size: 1.1em;
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .scene-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .style-selectors {
+        grid-template-columns: 1fr;
+    }
+
+    .colors-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 20px 10px;
+    }
+
+    .upload-area {
+        min-height: 200px;
+        padding: 20px;
+    }
+
+    .score-value {
+        font-size: 3em;
+    }
+}

@@ -34,6 +34,16 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB最大文件大小
 app.config['UPLOAD_FOLDER'] = os.path.join(BASE_DIR, 'static/images/uploads')
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif', 'bmp'}
 
+# CORS 配置（允许 Cloudflare Pages 前端调用）
+from flask_cors import CORS
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ["*"],  # 生产环境应该指定具体域名
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
+    }
+})
+
 # 确保上传目录存在
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
