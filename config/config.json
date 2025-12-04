@@ -1,0 +1,31 @@
+{
+  "app": {
+    "name": "Outfit Simulator",
+    "version": "1.0.0",
+    "description": "智能穿搭分析系统"
+  },
+  "model": {
+    "style_recognizer": {
+      "path": "models/best_model.h5",
+      "required": false,
+      "description": "款式识别模型（可选，不存在时仅使用颜色和规则分析）"
+    }
+  },
+  "upload": {
+    "max_size_mb": 16,
+    "allowed_formats": ["png", "jpg", "jpeg", "gif", "bmp"]
+  },
+  "analysis": {
+    "color_extraction": {
+      "n_colors": 5,
+      "enabled": true
+    },
+    "style_recognition": {
+      "enabled": true,
+      "top_k": 3
+    },
+    "rule_evaluation": {
+      "enabled": true
+    }
+  }
+}

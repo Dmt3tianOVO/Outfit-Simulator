@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>穿搭分析 - Outfit Simulator</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部 -->
+        <header class="app-header">
+            <h1>穿搭分析</h1>
+            <p class="subtitle">智能搭配建议</p>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 上传/拍照区域 -->
+            <section class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                    <div class="upload-placeholder" id="uploadPlaceholder">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                        <p class="upload-text">点击上传图片</p>
+                        <p class="upload-hint">支持 PNG, JPG, GIF, BMP 格式</p>
+                    </div>
+                </div>
+
+                <!-- 场景选择器 -->
+                <div class="context-selector">
+                    <label class="context-label">选择场景</label>
+                    <div class="context-buttons">
+                        <button class="context-btn active" data-context="休闲">休闲</button>
+                        <button class="context-btn" data-context="工作">工作</button>
+                        <button class="context-btn" data-context="正式场合">正式</button>
+                        <button class="context-btn" data-context="运动">运动</button>
+                    </div>
+                </div>
+
+                <!-- 款式选择器 -->
+                <div class="style-selector">
+                    <label class="style-label">选择款式（可选）</label>
+                    <div class="style-inputs">
+                        <div class="style-group">
+                            <label for="topStyle">上衣</label>
+                            <select id="topStyle">
+                                <option value="">自动识别</option>
+                                <option value="T恤">T恤</option>
+                                <option value="衬衫">衬衫</option>
+                                <option value="卫衣">卫衣</option>
+                                <option value="外套">外套</option>
+                            </select>
+                        </div>
+                        <div class="style-group">
+                            <label for="bottomStyle">下装</label>
+                            <select id="bottomStyle">
+                                <option value="">自动识别</option>
+                                <option value="牛仔裤">牛仔裤</option>
+                                <option value="休闲裤">休闲裤</option>
+                                <option value="运动裤">运动裤</option>
+                                <option value="短裤">短裤</option>
+                            </select>
+                        </div>
+                        <div class="style-group">
+                            <label for="shoeStyle">鞋子</label>
+                            <select id="shoeStyle">
+                                <option value="">自动识别</option>
+                                <option value="运动鞋">运动鞋</option>
+                                <option value="皮鞋">皮鞋</option>
+                                <option value="休闲鞋">休闲鞋</option>
+                                <option value="靴子">靴子</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 分析按钮 -->
+                <button class="btn-primary btn-large" id="analyzeBtn" disabled>开始分析</button>
+            </section>
+
+            <!-- 分析结果区域 -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h2 class="results-title">分析结果</h2>
+                
+                <!-- 评分卡片 -->
+                <div class="score-card">
+                    <div class="score-circle" id="scoreCircle">
+                        <span class="score-value" id="scoreValue">0</span>
+                        <span class="score-label">分</span>
+                    </div>
+                    <div class="score-status" id="scoreStatus">等待分析</div>
+                </div>
+
+                <!-- 颜色分析 -->
+                <div class="result-card">
+                    <h3 class="card-title">主色调分析</h3>
+                    <div class="colors-grid" id="colorsGrid"></div>
+                    <div class="color-evaluation" id="colorEvaluation"></div>
+                </div>
+
+                <!-- 款式识别 -->
+                <div class="result-card" id="styleCard" style="display: none;">
+                    <h3 class="card-title">款式识别</h3>
+                    <div class="style-list" id="styleList"></div>
+                </div>
+
+                <!-- 规则评估 -->
+                <div class="result-card" id="ruleCard" style="display: none;">
+                    <h3 class="card-title">搭配规则评估</h3>
+                    <div class="rules-list" id="rulesList"></div>
+                </div>
+
+                <!-- 建议列表 -->
+                <div class="result-card">
+                    <h3 class="card-title">改进建议</h3>
+                    <ul class="suggestions-list" id="suggestionsList"></ul>
+                </div>
+
+                <!-- 重新分析按钮 -->
+                <button class="btn-secondary btn-large" id="reanalyzeBtn">重新分析</button>
+            </section>
+
+            <!-- 历史记录区域 -->
+            <section class="history-section">
+                <div class="history-header">
+                    <h2 class="history-title">历史记录</h2>
+                    <button class="btn-icon" id="refreshHistoryBtn" title="刷新">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <polyline points="1 20 1 14 7 14"></polyline>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="history-grid" id="historyGrid">
+                    <p class="empty-state">暂无历史记录</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 加载遮罩 -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="spinner"></div>
+        <p>分析中...</p>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

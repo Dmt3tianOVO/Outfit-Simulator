@@ -1,0 +1,55 @@
+# Vercel 部署时忽略的文件
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+
+# 数据文件（太大）
+data/
+*.csv
+*.json
+
+# 测试文件
+tests/
+test_*.py
+*_test.py
+
+# 文档
+*.md
+!README.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# 日志
+*.log
+src/logs/
+
+# 临时文件
+*.tmp
+*.bak
+*.swp
+
+# 训练脚本（不需要部署）
+train*.py
+download*.py
+prepare_data.py
+fix_*.py
+verify_project.py
+create_dummy_model.py
+
+# 大文件（如果模型太大，考虑使用外部存储）
+# models/*.h5
